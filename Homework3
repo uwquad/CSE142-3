@@ -1,0 +1,65 @@
+// Shelby Fosburgh
+// CSE 142 A
+// Professor - Stuart Reges
+// TA - Ashley Donaldson
+
+//This program creates the Cafe Wall Illusion
+import java.awt.*;
+
+public class CafeWall {
+public static final int MORTAR = 2;
+
+   public static void main(String[] args) {
+      DrawingPanel panel = new DrawingPanel(650, 400);
+      panel.setBackground(Color.GRAY);      
+      Graphics g = panel.getGraphics();
+      
+      drawOneRow(g, 0, 0, 20, 4); 
+      drawOneRow(g, 50, 70, 30, 5);
+      drawGrid(g, 10, 150, 25, 4, 8, 0);
+      drawGrid(g, 250, 200, 25, 3, 6, 10);
+      drawGrid(g, 425, 180, 20, 5, 10, 10);
+      drawGrid(g, 400, 20, 35, 2, 4, 35);  
+   }
+     
+   //This is a method to produce a single row of black and white squares
+   public static void drawOneRow(Graphics g, int x, int y, int size, int numberpair) {
+      for (int i = 1; i <= numberpair; i++) {
+         drawOnePair(g, (x += 2*size) - 2*size, y, size, 4); 
+      } 
+   }  
+    
+   //This is a method to produce one pair of black and white squares        
+   public static void drawOnePair(Graphics g, int x, int y, int size, int numberpair) {
+      g.setColor(Color.BLACK);         
+      g.fillRect(x, y, size, size);  //piece that deals with the black squares
+      g.setColor(Color.WHITE);
+      g.fillRect(x + size, y, size, size);  //piece that deals with the white squares
+      g.setColor(Color.BLUE);
+      g.drawLine(x, y, x + size, y + size);  //piece that deals with the blue lines
+      g.drawLine(x, y + size, x + size, y);        
+   }  
+   
+   //This is a method to produce a grid of multiple rows of black and white squares
+   public static void drawGrid(Graphics g, int x, int y, int size, int numberpair, int rowcount, int offset) {  
+      int tempy = y;
+      int counter = 0;
+      if (offset == 0) {
+         for (int j = 1; j <= rowcount; j++) { 
+            drawOneRow(g, x, tempy, size, numberpair);
+            tempy = tempy + size + MORTAR;
+         }
+      } else {
+         for (int j = 1; j <= rowcount; j++) { 
+            counter = counter + 1; 
+            if (counter % 2 == 0) {
+               drawOneRow(g, x + offset, tempy, size, numberpair);
+            } else {
+               drawOneRow(g, x, tempy, size, numberpair);    //this is for odd  
+            }
+            tempy = tempy + size + MORTAR;
+         }
+      }               
+   } 
+}
+
