@@ -3,7 +3,7 @@
 // Professor - Stuart Reges
 // TA - Ashley Donaldson
 
-//This program creates the Cafe Wall Illusion
+//This program creates the Cafe Wall Illusion for my CSE 142 class
 import java.awt.*;
 
 public class CafeWall {
